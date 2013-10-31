@@ -1,3 +1,6 @@
+require 'pry'
+# encoding: UTF-8
+
 require_relative 'predictor'
 
 # This is a simple predictor that isn't very smart, but it's not too shabby. It
@@ -31,6 +34,8 @@ class SimplePredictor < Predictor
         words: 0,
         books: 0
       }
+      # Tokens is all the words in the book.
+      # So we're counting all the words in the book.
       books.each do |filename, tokens|
         @data[category][:words] += tokens.count
         @data[category][:books] += 1

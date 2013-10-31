@@ -1,8 +1,10 @@
+# encoding: UTF-8
+
 require 'set'
 require 'find'
 
 class Predictor
-  CATEGORIES = [:astronomy, :philosophy, :physics, :religion, :archeology]
+  CATEGORIES = [:astronomy, :philosophy, :religion, :archeology]
   STOP_WORDS = Set.new(File.read('data/stopwords.txt').split(','))
 
   # Public: Initialize object.
@@ -42,7 +44,7 @@ class Predictor
   # Returns true if you should use this token. In our project, "token" is
   # synonymous with "word".
   def good_token?(token)
-    !STOP_WORDS.include?(token) && token.size > 2
+    !STOP_WORDS.include?(token) && token.size > 5
   end
 
   #############################################################################
@@ -89,12 +91,14 @@ class Predictor
   # tokensize("hello world")
   def tokenize(string)
     require 'iconv' unless String.method_defined?(:encode)
+
     if String.method_defined?(:encode)
       string.encode!('UTF-8', 'UTF-8', :invalid => :replace)
     else
       ic = Iconv.new('UTF-8', 'UTF-8//IGNORE')
-      string = ic.iconv(string)
+      string = ic.iconv(string + ' ')[]
     end
+
     string.split(/\W+/).map(&:downcase) # Split by non-words
   end
 

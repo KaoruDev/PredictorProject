@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require_relative 'lib/simple_predictor'
 require_relative 'lib/complex_predictor'
 
@@ -23,6 +25,6 @@ def run!(predictor_klass, opts={})
   puts "Accuracy: #{accuracy}"
 end
 
-run!(SimplePredictor)
+# run!(SimplePredictor)
 run!(ComplexPredictor, debug: true)
 
